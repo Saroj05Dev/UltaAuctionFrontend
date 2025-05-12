@@ -1,0 +1,19 @@
+import { configureStore } from "@reduxjs/toolkit";
+import AuthSliceReducer from "./slices/AuthSlice";
+import AuctionSliceReducer from "./slices/AuctionSlice";
+import BiddingSliceReducer from "./slices/BiddingSlice";
+import AdminSliceReducer from "./slices/adminSlice";
+
+export const store = configureStore({
+    reducer: {
+        auth: AuthSliceReducer,
+        auction: AuctionSliceReducer,
+        bidding: BiddingSliceReducer,
+        admin: AdminSliceReducer,
+    },
+    devTools: true,
+    middleware: getDefaultMiddleware => 
+        getDefaultMiddleware({
+            serializableCheck:  false
+        }),
+});
