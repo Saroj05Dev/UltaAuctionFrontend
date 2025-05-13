@@ -13,6 +13,8 @@ import ManageAuctions from './pages/admin/ManageAuction'
 import NotFound from './pages/NotFound'
 import { Route, Routes } from 'react-router-dom'
 import UpdateAuction from './pages/admin/UpdateAuction'
+import Users from './pages/admin/UsersPage'
+import Reports from './pages/admin/Reports'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -26,7 +28,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/auctions" element={<AuctionsPage />} />
 
-        {/* ✅ Single auction view */}
+        {/* Single auction view */}
         <Route path="/auctions/:auctionId" element={<BiddingPage />} />
 
         {/** Admin related pages */}
@@ -35,8 +37,8 @@ function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="auctions" element={<ManageAuctions />} />
-          {/* <Route path="users" element={<ManageUsers />} />
-          <Route path="reports" element={<Reports />} /> */}
+          <Route path='/admin/users' element={<Users />} />
+          <Route path="/admin/reports" element={<Reports />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
