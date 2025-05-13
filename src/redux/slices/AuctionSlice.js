@@ -11,7 +11,6 @@ const intialState = {
 export const fetchAuctions = createAsyncThunk('auction/fetchAuctions', async () => {
     try {
         const response = await axiosInstance.get('/auctions')
-        console.log("response", response);
         if(response.data.success) {
                     toast.success(response.data.message)
                 } else {
@@ -24,6 +23,22 @@ export const fetchAuctions = createAsyncThunk('auction/fetchAuctions', async () 
     }
 });
 
+export const fetchAuctionById = createAsyncThunk('auction/fetchAuctionById', async (id, thunkAPI) => {
+    try {
+        const response = await axiosInstance.get(`/auctions/${id}`)
+        if(response.data.success) {
+                    toast.success(response.data.message)
+                } else {
+                    toast.error(response.data.message)  
+                }
+                return response.data;
+    } catch (error) {
+        console.log(error)
+        return thunkAPI.rejectWithValue({ error: error.message });
+    }
+});
+
+
 export const createAuction = createAsyncThunk('auction/createAuction', async (data) => {
     try {
         const response = await axiosInstance.post('/auctions', data, {
@@ -31,7 +46,6 @@ export const createAuction = createAsyncThunk('auction/createAuction', async (da
                 'Content-Type': 'multipart/form-data',
             }
         })
-        console.log("response for createAuc", response);
         if(response.data.success) {
                     toast.success(response.data.message)
                 } else {
@@ -47,7 +61,6 @@ export const createAuction = createAsyncThunk('auction/createAuction', async (da
 export const deleteAuction = createAsyncThunk('auction/deleteAuction', async (id) => {
     try {
         const response = await axiosInstance.delete(`/auctions/${id}`)
-        console.log("response from deleteAuc", response);
         if(response.data.success) {
                     toast.success(response.data.message)
                 } else {
@@ -67,7 +80,6 @@ export const updateAuction = createAsyncThunk('auction/updateAuction', async ({i
                 'Content-Type': 'multipart/form-data',
             }
         })
-        console.log("response from updateAuc", response);
         if(response.data.success) {
                     toast.success(response.data.message)
                 } else {
@@ -112,6 +124,10 @@ const auctionSlice = createSlice({
             .addCase(createAuction.fulfilled, (state, action) => {
                 const newAuction = action.payload.data;
                 state.auctions.push(newAuction);
+            })
+            .addCase(fetchAuctionById.fulfilled, (state, action) => {
+                state.loading = false;
+                state.auctions = action.payload;
             })
     }
 })
