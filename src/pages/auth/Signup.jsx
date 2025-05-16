@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import SignupPresentation from './SignupPresentation';
 import { useDispatch } from 'react-redux';
-import { createAccount } from '../../Redux/Slices/AuthSlice';
+import { createAccount } from '../../redux/slices/AuthSlice';
 import { useNavigate } from 'react-router-dom';
 // Container for the signup page
 function Signup() {
@@ -47,6 +47,11 @@ function Signup() {
         // check mobile number
         if(signUpState.mobileNumber.length < 10 || signUpState.mobileNumber.length > 12) {
             toast.error("Mobile number should be between 10-12 digits long")
+        }
+
+        // check password validation 
+        if(signUpState.password.length < 8) {
+            toast.error("Password should be atleast 8 characters long, it should contain atleast 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character")
         }
 
         const apiResponse = await dispatch(createAccount(signUpState));

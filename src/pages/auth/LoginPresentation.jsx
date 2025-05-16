@@ -1,4 +1,3 @@
-import React from 'react'
 import SignInIllustration from "../../assets/signin.svg";
 import { Link } from 'react-router-dom';
 

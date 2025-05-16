@@ -43,7 +43,6 @@ function Home() {
           />
         </div>
       </section>
-
       {/** Auction Section */}
       <section className="py-4 mt-6 bg-gradient-to-l from-slate-50 to-slate-200">
         <div className="container flex flex-col md:flex-row">

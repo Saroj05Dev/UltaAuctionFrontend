@@ -16,6 +16,8 @@ import Users from "./pages/admin/UsersPage";
 import Reports from "./pages/admin/Reports";
 import RequireAuth from "./pages/auth/RequireAuth";
 import AdminRoutes from "./components/adminRoutes";
+import HowItWorks from "./pages/HowItWorksPage";
+import About from "./pages/AboutPage";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route path="/denied" element={<Denied />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
+        <Route path="/about" element={<About />} />
 
         {/** Protected user routes */}
         <Route element={<RequireAuth />}>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { login } from '../../redux/Slices/AuthSlice';
+import { login } from '../../redux/slices/AuthSlice';
 import LoginPresentation from './LoginPresentation';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,16 +31,18 @@ function Login() {
             // Add validations for the form input
             if(!loginData.email || !loginData.password) {
                 toast.error("Missing values from the form");
+                return;
             }
     
             // check email
             if(!loginData.email.includes('@' || !loginData.email.includes('.'))) {
                 toast.error("Please fill a valid email")
+                return;
             }
     
             const apiResponse = await dispatch(login(loginData));
             console.log("api response: ", apiResponse)
-            if(apiResponse.payload.data.success) {
+            if(apiResponse?.payload?.data?.success) {
                 navigate('/')
             }
         }

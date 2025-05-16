@@ -40,10 +40,14 @@ function Layout({ children }) {
               </Link>
             </li>
             <li className="hover:text-blue-500 cursor-pointer">
+              <Link to="/how-it-works">
               <p>How It Works</p>
+              </Link>
             </li>
             <li className="hover:text-blue-500 cursor-pointer">
+              <Link to="/about">
               <p>About</p>
+              </Link>
             </li>
           </ul>
         </div>

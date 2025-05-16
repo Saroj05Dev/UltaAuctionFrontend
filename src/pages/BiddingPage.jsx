@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { placeBid, fetchBids } from "../redux/slices/BiddingSlice";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchAuctionById } from "../redux/slices/AuctionSlice";
 import Layout from "../layout/Layout";
 
 const BiddingPage = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
   const authData = useSelector((state) => state.auth?.data);
@@ -25,6 +26,8 @@ const BiddingPage = () => {
     if (!bidAmount) {
       toast.error("Please enter a bid amount");
       return;
+    } else {
+      navigate("/auctions");
     }
 
     if (!id || !userId) {

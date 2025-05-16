@@ -4,7 +4,6 @@ import Layout from '../../layout/Layout'
 
 function CreateAuctionPresentation({ handleUserInput, handleFormSubmit, submitting }) {
   return (
-    <Layout>
     <div className="flex flex-col md:flex-row items-center justify-center gap-6 p-6">
       <div className="hidden md:block">
       <img src={AuctionSvg} alt="Auction Image" className="h-[400px] w-[400px]"/>
@@ -85,7 +84,6 @@ function CreateAuctionPresentation({ handleUserInput, handleFormSubmit, submitti
         </form>
       </div>
     </div>
-    </Layout>
   );
 }
 
