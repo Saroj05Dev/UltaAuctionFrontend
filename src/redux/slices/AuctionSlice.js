@@ -110,7 +110,7 @@ export const declareWinner = createAsyncThunk(
   "auction/declareWinner",
   async ({ id }, thunkAPI) => {
     try {
-      const response = await axiosInstance.patch(
+      const response = await axiosInstance.post(
         `/auctions/${id}/declare-winner`
       );
       console.log("response from declare winner", response);
@@ -123,7 +123,7 @@ export const declareWinner = createAsyncThunk(
       return apiResponse.data;
     } catch (error) {
       console.log(error);
-      toast.error(err.response?.data?.message || "Failed to declare winner");
+      toast.error(error.response?.data?.message || "Failed to declare winner");
       return thunkAPI.rejectWithValue({ error: error.message });
     }
   }
@@ -169,7 +169,7 @@ const auctionSlice = createSlice({
         state.auctions = action.payload;
       })
       .addCase(declareWinner.fulfilled, (state, action) => {
-        const updatedAuction = action.payload.data;
+        const updatedAuction = action.payload.data.data;
         const index = state.auctions.findIndex(
           (a) => a._id === updatedAuction._id
         );

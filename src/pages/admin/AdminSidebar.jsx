@@ -1,4 +1,3 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom';
 
 const navItems = [
@@ -6,6 +5,7 @@ const navItems = [
     { name: 'Auctions', path: '/admin/auctions' },
     { name: 'Users', path: '/admin/users' },
     { name: 'Reports', path: '/admin/reports' },
+    {name: 'Declare-Winner', path: '/admin/declare-winner'}
   ];
 
 function AdminSidebar() {

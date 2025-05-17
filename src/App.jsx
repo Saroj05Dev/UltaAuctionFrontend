@@ -18,6 +18,7 @@ import RequireAuth from "./pages/auth/RequireAuth";
 import AdminRoutes from "./components/adminRoutes";
 import HowItWorks from "./pages/HowItWorksPage";
 import About from "./pages/AboutPage";
+import AdminDeclareWinner from "./pages/admin/DeclareWinner";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="declare-winner" element={<AdminDeclareWinner />} />
           <Route path="auctions" element={<ManageAuctions />} />
           <Route path="create-auction" element={<CreateAuction />} />
           <Route path="update-auction/:auctionId" element={<UpdateAuction />} />

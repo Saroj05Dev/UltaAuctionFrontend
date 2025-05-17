@@ -19,17 +19,17 @@ function AuctionsPage() {
     setFilteredAuctions(auctions);
   }, [auctions]);
 
-  function applyFilters(status, minBid, maxBid, search) {
+  function applyFilters({ status, minBid, maxBid, search }) {
     let filtered = auctions;
 
     if (status) {
       filtered = filtered.filter((auction) => auction.status === status);
     }
     if (minBid) {
-      filtered = filtered.filter((auction) => auction.startingBid >= minBid);
+      filtered = filtered.filter((auction) => auction.startingBid >= parseFloat(minBid));
     }
     if (maxBid) {
-      filtered = filtered.filter((auction) => auction.startingBid <= maxBid);
+      filtered = filtered.filter((auction) => auction.startingBid <= parseFloat(maxBid));
     }
     if (search) {
       filtered = filtered.filter((auction) =>

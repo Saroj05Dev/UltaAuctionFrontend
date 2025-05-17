@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { act, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAuctions, declareWinner } from "../redux/slices/auctionSlice";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { fetchAuctions, declareWinner } from "../../redux/slices/AuctionSlice";
+import { Card, CardContent } from "../../components/ui/Card";
 import { Loader2 } from "lucide-react";
 
 const AdminDeclareWinner = () => {
@@ -32,25 +31,34 @@ const AdminDeclareWinner = () => {
             auctions.map((auction) => (
               <Card key={auction._id} className="shadow-lg">
                 <CardContent className="p-4 space-y-3">
-                  <h2 className="text-lg font-bold">{auction.productName}</h2>
-                  <p className="text-sm text-gray-600">Base Price: ₹{auction.basePrice}</p>
-                  <p className="text-sm text-gray-600">Status: {auction.status}</p>
+                  <h2 className="text-lg font-bold">{auction.title}</h2>
+                  <p className="text-sm text-gray-600">
+                    Base Price: ₹{auction.startingBid}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    Status: {auction.status}
+                  </p>
                   <p className="text-sm">
                     Winner:{" "}
-                    {auction.winner ? (
-                      <span className="text-green-600 font-semibold">{auction.winner?.name}</span>
+                    {auction.winnerId ? (
+                      <span className="text-green-600 font-semibold">
+                        {`${auction.winnerId.firstName} ${auction.winnerId.lastName}`}
+                      </span>
                     ) : (
                       <span className="text-red-500">Not Declared</span>
                     )}
                   </p>
-                  <Button
-                    variant="default"
-                    className="w-full"
-                    disabled={!!auction.winner || auction.status !== "ended"}
+                  <button
+                    className={`w-full px-4 py-2 rounded text-white ${
+                      auction.winnerId || auction.status !== "completed"
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-blue-600 hover:bg-blue-700"
+                    }`}
+                    disabled={!!auction.winner || auction.status !== "completed"}
                     onClick={() => handleDeclareWinner(auction._id)}
                   >
-                    {auction.winner ? "Winner Declared" : "Declare Winner"}
-                  </Button>
+                    {auction.winnerId ? "Winner Declared" : "Declare Winner"}
+                  </button>
                 </CardContent>
               </Card>
             ))
