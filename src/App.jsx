@@ -19,6 +19,7 @@ import AdminRoutes from "./components/adminRoutes";
 import HowItWorks from "./pages/HowItWorksPage";
 import About from "./pages/AboutPage";
 import AdminDeclareWinner from "./pages/admin/DeclareWinner";
+import LeaderboardPage from "./pages/LeaderboardPage";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route element={<RequireAuth />}>
           <Route path="/auctions/:id" element={<BiddingPage />} />
           <Route path="/auctions" element={<AuctionsPage />} />
+          <Route path="/auction/:auctionId/leaderboard" element={<LeaderboardPage />} />
         </Route>
 
           <Route element={<AdminRoutes />}>

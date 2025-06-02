@@ -11,7 +11,6 @@ function AuctionsPage() {
   const [filteredAuctions, setFilteredAuctions] = useState([]);
 
   useEffect(() => {
-    // This is where you can dispatch any actions needed on component mount
     dispatch(fetchAuctions());
   }, []);
 
@@ -41,11 +40,14 @@ function AuctionsPage() {
 
   return (
     <Layout>
-      <div className="p-6">
-        <h1 className="text-2xl font-semibold mb-4">Browse Auctions</h1>
+      <div className="max-w-screen-xl mx-auto px-4 py-8">
+        <h1 className="text-2xl font-bold mb-6 text-center md:text-left">
+          Browse Auctions
+        </h1>
+
         <AuctionFilters onFilter={applyFilters} />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {Array.isArray(filteredAuctions) && filteredAuctions.length > 0 ? (
             filteredAuctions.map((auction) => (
               <AuctionCard key={auction._id} auction={auction} />

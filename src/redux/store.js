@@ -5,6 +5,7 @@ import BiddingSliceReducer from "./slices/BiddingSlice";
 import AdminSliceReducer from "./slices/adminSlice";
 import AdminUserSliceReducer from "./slices/adminUserSlice";
 import adminReportSliceReducer from "./slices/adminReportSlice";
+import auctionLeaderboardReducer from "./slices/leaderboardSlice"
 
 export const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
         bidding: BiddingSliceReducer,
         admin: AdminSliceReducer,
         adminUser: AdminUserSliceReducer,
-        adminReport: adminReportSliceReducer
+        adminReport: adminReportSliceReducer,
+        auctionLeaderboard: auctionLeaderboardReducer
     },
     devTools: true,
     middleware: getDefaultMiddleware => 
