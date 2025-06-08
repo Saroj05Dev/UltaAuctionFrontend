@@ -15,7 +15,7 @@ import UpdateAuction from "./pages/admin/UpdateAuction";
 import Users from "./pages/admin/UsersPage";
 import Reports from "./pages/admin/Reports";
 import RequireAuth from "./pages/auth/RequireAuth";
-import AdminRoutes from "./components/AdminRoutes";
+import AdminRoutes from "./components/adminRoutes";
 import HowItWorks from "./pages/HowItWorksPage";
 import About from "./pages/AboutPage";
 import AdminDeclareWinner from "./pages/admin/DeclareWinner";
