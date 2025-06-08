@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 const initialState = {
   bids: [],
+  myBids: [],
   loading: false,
   error: null,
 };
@@ -51,6 +52,18 @@ export const fetchBids = createAsyncThunk("bid/fetchBid", async (auctionId) => {
   }
 });
 
+// ✅ New: Get All Bids by Logged-in User
+export const fetchMyBids = createAsyncThunk("bid/fetchMyBids", async (_, thunkAPI) => {
+  try {
+    const response = await axiosInstance.get("/bids/my-bids/all");
+    return response.data.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(
+      error.response?.data?.message || error.message
+    );
+  }
+});
+
 const biddingSlice = createSlice({
   name: "bidding",
   initialState,
@@ -78,6 +91,19 @@ const biddingSlice = createSlice({
       .addCase(fetchBids.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      // ✅ Extra: fetchMyBids handling
+      .addCase(fetchMyBids.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchMyBids.fulfilled, (state, action) => {
+        state.loading = false;
+        state.myBids = action.payload;
+      })
+      .addCase(fetchMyBids.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });

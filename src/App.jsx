@@ -20,6 +20,7 @@ import HowItWorks from "./pages/HowItWorksPage";
 import About from "./pages/AboutPage";
 import AdminDeclareWinner from "./pages/admin/DeclareWinner";
 import LeaderboardPage from "./pages/LeaderboardPage";
+import MyBidsPage from "./pages/MyBidsPage";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/auctions/:id" element={<BiddingPage />} />
           <Route path="/auctions" element={<AuctionsPage />} />
           <Route path="/auction/:auctionId/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/my-bids" element={<MyBidsPage />} />
         </Route>
 
           <Route element={<AdminRoutes />}>

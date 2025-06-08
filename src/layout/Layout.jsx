@@ -8,6 +8,7 @@ import { useState } from "react";
 function Layout({ children }) {
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const role = useSelector((state) => state.auth?.role);
   const dispatch = useDispatch();
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,6 +48,11 @@ function Layout({ children }) {
             <Link to="/about" className="hover:text-blue-500">
               About
             </Link>
+            {isLoggedIn && role === "USER" && (
+              <Link to="/my-bids" className="hover:text-blue-500">
+              My Bids
+            </Link>
+            )}
             <div className="ml-40">
               {isLoggedIn ? (
                 <button
@@ -121,6 +127,11 @@ function Layout({ children }) {
             >
               About
             </Link>
+            {isLoggedIn && role === "USER" && (
+              <Link to="/my-bids" className="hover:text-blue-500">
+              My Bids
+            </Link>
+            )}
             {isLoggedIn ? (
               <button
                 onClick={handleLogout}
