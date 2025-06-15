@@ -18,6 +18,13 @@ const BiddingPage = () => {
   console.log("Auction data:", auction);
 
   useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
+  useEffect(() => {
     if (id) {
       dispatch(fetchAuctionById(id));
       dispatch(fetchBids(id));
@@ -28,8 +35,6 @@ const BiddingPage = () => {
     if (!bidAmount) {
       toast.error("Please enter a bid amount");
       return;
-    } else {
-      navigate("/auctions");
     }
 
     if (!id || !userId) {
@@ -47,6 +52,89 @@ const BiddingPage = () => {
       dispatch(fetchBids(id)); // Refresh bid list
     } catch (err) {
       toast.error(err || "Something went wrong");
+    }
+  };
+
+  const handlePayment = async () => {
+    if (!bidAmount || bidAmount <= 0) {
+      toast.error("Please enter a valid bid amount");
+      return;
+    }
+
+    try {
+      // Step 1: Create Razorpay Order from backend
+      const res = await fetch("http://localhost:3500/payment/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: bidAmount, // in rupees
+          currency: "INR",
+          receipt: `b_${id.slice(-3)}${userId.slice(-3)}`,
+        }),
+      });
+
+      const data = await res.json();
+      if (!data.success) {
+        toast.error("Order creation failed");
+        return;
+      }
+
+      const { id: order_id, amount, currency } = data.order;
+
+      // Step 2: Open Razorpay popup
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+        amount: amount,
+        currency: currency,
+        name: "UltaAuction",
+        description: "Auction Bid Payment",
+        order_id,
+        handler: async function (response) {
+          // Step 3: Verify payment
+          const verifyRes = await fetch(
+            "http://localhost:3500/payment/verify-payment",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+              }),
+            }
+          );
+
+          const verifyData = await verifyRes.json();
+
+          if (verifyData.success) {
+            toast.success("✅ Payment verified!");
+
+            // Place the bid after successful payment
+            const bidRes = await dispatch(
+              placeBid({ auctionId: id, userId, bidAmount })
+            ).unwrap();
+
+            setBidAmount("");
+            dispatch(fetchBids(id));
+          } else {
+            toast.error("❌ Payment verification failed.");
+          }
+        },
+        prefill: {
+          name: authData?.name || "Bidder",
+          email: authData?.email || "bidder@example.com",
+          contact: "9999999999",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.error("Payment Error:", error);
+      toast.error("Payment initiation failed");
     }
   };
 
@@ -89,10 +177,10 @@ const BiddingPage = () => {
             placeholder="Enter your bid amount"
           />
           <button
-            onClick={handlePlaceBid}
-            className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md"
+            onClick={handlePayment}
+            className="mt-4 w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md"
           >
-            Place Bid
+            Pay & Place Bid
           </button>
         </div>
 
