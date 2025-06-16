@@ -12,15 +12,20 @@ const initialState = {
 
 export const placeBid = createAsyncThunk(
   "bid/placeBid",
-  async ({ auctionId, userId, bidAmount }, thunkAPI) => {
+  async ({ auctionId, userId, bidAmount, paymentToken }, thunkAPI) => {
     try {
       const response = await axiosInstance.post('/bids', {
         auctionId,
         userId,
         bidAmount
-      });
-      console.log("response from placeBid", response);
-
+      },
+      {
+        headers: {
+          "authorization" : paymentToken // Add the payment token to the headers
+        }
+      } 
+    );
+      
       if (response.data.success) {
         toast.success(response.data.message);
       } else {
@@ -39,7 +44,6 @@ export const placeBid = createAsyncThunk(
 export const fetchBids = createAsyncThunk("bid/fetchBid", async (auctionId) => {
   try {
     const response = await axiosInstance.get(`/bids/${auctionId}`);
-    console.log("response from fetchBids", response);
     if (response.data.success) {
       toast.success(response.data.message);
     } else {

@@ -15,7 +15,9 @@ const BiddingPage = () => {
   const [bidAmount, setBidAmount] = useState("");
   const auctionRaw = useSelector((state) => state.auction.auctions?.data);
   const auction = Array.isArray(auctionRaw) ? auctionRaw[0] : auctionRaw;
-  console.log("Auction data:", auction);
+  const hasAlreadyBid = auction?.bids?.some(
+    (bid) => bid.userId === userId || bid.userId?._id === userId
+  );
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -60,14 +62,18 @@ const BiddingPage = () => {
       toast.error("Please enter a valid bid amount");
       return;
     }
+    if (hasAlreadyBid) {
+      toast.error("You have already placed a bid in this auction.");
+      return;
+    }
 
     try {
-      // Step 1: Create Razorpay Order from backend
+      // Step 1: Create Razorpay Order
       const res = await fetch("http://localhost:3500/payment/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: bidAmount, // in rupees
+          amount: bidAmount,
           currency: "INR",
           receipt: `b_${id.slice(-3)}${userId.slice(-3)}`,
         }),
@@ -84,8 +90,8 @@ const BiddingPage = () => {
       // Step 2: Open Razorpay popup
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-        amount: amount,
-        currency: currency,
+        amount,
+        currency,
         name: "UltaAuction",
         description: "Auction Bid Payment",
         order_id,
@@ -104,18 +110,24 @@ const BiddingPage = () => {
             }
           );
 
-          const verifyData = await verifyRes.json();
+          const verifyData = await verifyRes.json(); // NOW it's defined properly
 
           if (verifyData.success) {
             toast.success("✅ Payment verified!");
 
-            // Place the bid after successful payment
-            const bidRes = await dispatch(
-              placeBid({ auctionId: id, userId, bidAmount })
-            ).unwrap();
+            const paymentToken = verifyData.token;
 
-            setBidAmount("");
-            dispatch(fetchBids(id));
+            try {
+              const bidRes = await dispatch(
+                placeBid({ auctionId: id, userId, bidAmount, paymentToken })
+              ).unwrap();
+
+              toast.success("🎉 Bid placed successfully!");
+              setBidAmount("");
+              dispatch(fetchBids(id));
+            } catch (err) {
+              toast.error(err || "Payment succeeded but bid failed");
+            }
           } else {
             toast.error("❌ Payment verification failed.");
           }
@@ -170,17 +182,28 @@ const BiddingPage = () => {
           </label>
           <input
             type="number"
+            min="1"
             id="bidAmount"
             value={bidAmount}
             onChange={(e) => setBidAmount(e.target.value)}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            disabled={hasAlreadyBid}
+            className={`w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 ${
+              hasAlreadyBid
+                ? "bg-gray-100 cursor-not-allowed"
+                : "focus:ring-blue-500"
+            }`}
             placeholder="Enter your bid amount"
           />
           <button
             onClick={handlePayment}
-            className="mt-4 w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md"
+            disabled={hasAlreadyBid}
+            className={`mt-4 w-full text-white py-2 px-4 rounded-md ${
+              hasAlreadyBid
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-green-600 hover:bg-green-700"
+            }`}
           >
-            Pay & Place Bid
+            {hasAlreadyBid ? "Bid Already Placed" : "Pay & Place Bid"}
           </button>
         </div>
 

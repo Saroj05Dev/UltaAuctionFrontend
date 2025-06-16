@@ -1,4 +1,4 @@
-import React, { act, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAuctions, declareWinner } from "../../redux/slices/AuctionSlice";
 import { Card, CardContent } from "../../components/ui/Card";
@@ -54,7 +54,7 @@ const AdminDeclareWinner = () => {
                         ? "bg-gray-400 cursor-not-allowed"
                         : "bg-blue-600 hover:bg-blue-700"
                     }`}
-                    disabled={!!auction.winner || auction.status !== "completed"}
+                    disabled={!!auction.winner || !(auction.status === "completed" || auction.slotsFilled >= auction.maxSlots)}
                     onClick={() => handleDeclareWinner(auction._id)}
                   >
                     {auction.winnerId ? "Winner Declared" : "Declare Winner"}

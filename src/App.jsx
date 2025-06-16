@@ -21,7 +21,6 @@ import About from "./pages/AboutPage";
 import AdminDeclareWinner from "./pages/admin/DeclareWinner";
 import LeaderboardPage from "./pages/LeaderboardPage";
 import MyBidsPage from "./pages/MyBidsPage";
-import PhoneLogin from "./components/PhoneLogin";
 
 function App() {
   return (
@@ -34,7 +33,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/about" element={<About />} />
-        <Route path="/phoneloginpage" element={<PhoneLogin />} />
 
         {/** Protected user routes */}
         <Route element={<RequireAuth />}>

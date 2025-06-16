@@ -169,7 +169,7 @@ const auctionSlice = createSlice({
         state.auctions = action.payload;
       })
       .addCase(declareWinner.fulfilled, (state, action) => {
-        const updatedAuction = action.payload.data.data;
+        const updatedAuction = action.payload.data;
         const index = state.auctions.findIndex(
           (a) => a._id === updatedAuction._id
         );
