@@ -166,7 +166,7 @@ const auctionSlice = createSlice({
       })
       .addCase(fetchAuctionById.fulfilled, (state, action) => {
         state.loading = false;
-        state.auctions = action.payload;
+        state.auctions = action.payload.data;
       })
       .addCase(declareWinner.fulfilled, (state, action) => {
         const updatedAuction = action.payload.data;
