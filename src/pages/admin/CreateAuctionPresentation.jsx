@@ -4,12 +4,15 @@ import Layout from '../../layout/Layout'
 
 function CreateAuctionPresentation({ handleUserInput, handleFormSubmit, submitting }) {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center gap-6 p-6">
-      <div className="hidden md:block">
-      <img src={AuctionSvg} alt="Auction Image" className="h-[400px] w-[400px]"/>
+    <div className="flex flex-col lg:flex-row items-center justify-center gap-6 px-4 py-6 max-w-screen-xl mx-auto">
+      {/* Image Section */}
+      <div className="w-full lg:w-1/2 hidden md:flex justify-center">
+        <img src={AuctionSvg} alt="Auction Image" className="w-full max-w-md h-auto" />
       </div>
-      <div className="max-w-xl mx-auto p-6 bg-white rounded shadow">
-        <h2 className="text-2xl text-center font-semibold mb-4">
+
+      {/* Form Section */}
+      <div className="w-full lg:w-1/2 bg-white rounded shadow p-4 sm:p-6 md:p-8">
+        <h2 className="text-xl sm:text-2xl text-center font-semibold mb-4">
           Create New Auction
         </h2>
         <form className="space-y-4" onSubmit={handleFormSubmit}>
@@ -20,7 +23,7 @@ function CreateAuctionPresentation({ handleUserInput, handleFormSubmit, submitti
             placeholder="Auction Title"
             onChange={handleUserInput}
             required
-            className="w-full px-4 py-2 border rounded"
+            className="w-full px-4 py-2 border rounded text-sm sm:text-base"
           />
           <textarea
             name="description"
@@ -28,7 +31,7 @@ function CreateAuctionPresentation({ handleUserInput, handleFormSubmit, submitti
             id="description"
             onChange={handleUserInput}
             required
-            className="w-full px-4 py-2 border rounded"
+            className="w-full px-4 py-2 border rounded text-sm sm:text-base"
           />
           <input
             type="number"
@@ -37,7 +40,7 @@ function CreateAuctionPresentation({ handleUserInput, handleFormSubmit, submitti
             placeholder="Starting Bid"
             onChange={handleUserInput}
             required
-            className="w-full px-4 py-2 border rounded"
+            className="w-full px-4 py-2 border rounded text-sm sm:text-base"
           />
           <input
             type="number"
@@ -46,7 +49,7 @@ function CreateAuctionPresentation({ handleUserInput, handleFormSubmit, submitti
             placeholder="Bid Increment"
             onChange={handleUserInput}
             required
-            className="w-full px-4 py-2 border rounded"
+            className="w-full px-4 py-2 border rounded text-sm sm:text-base"
           />
           <input
             type="datetime-local"
@@ -54,7 +57,7 @@ function CreateAuctionPresentation({ handleUserInput, handleFormSubmit, submitti
             id="endTime"
             onChange={handleUserInput}
             required
-            className="w-full px-4 py-2 border rounded"
+            className="w-full px-4 py-2 border rounded text-sm sm:text-base"
           />
           <input
             type="number"
@@ -63,7 +66,7 @@ function CreateAuctionPresentation({ handleUserInput, handleFormSubmit, submitti
             placeholder="Max Slots"
             onChange={handleUserInput}
             required
-            className="w-full px-4 py-2 border rounded"
+            className="w-full px-4 py-2 border rounded text-sm sm:text-base"
           />
           <input
             type="file"
@@ -72,12 +75,12 @@ function CreateAuctionPresentation({ handleUserInput, handleFormSubmit, submitti
             accept="image/*"
             onChange={handleUserInput}
             required
-            className="w-full cursor-pointer"
+            className="w-full text-sm cursor-pointer"
           />
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer transition duration-300 ease-in-out"
+            className="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300 ease-in-out text-sm sm:text-base"
           >
             {submitting ? "Creating..." : "Create Auction"}
           </button>
