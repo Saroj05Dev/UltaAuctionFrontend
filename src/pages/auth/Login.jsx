@@ -52,10 +52,6 @@ function Login() {
         navigate("/");
       }
     }
-
-    // if (apiResponse?.payload?.data?.success) {
-    //   navigate("/");
-    // }
   }
 
   return (
