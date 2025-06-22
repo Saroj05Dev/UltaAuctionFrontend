@@ -44,7 +44,7 @@ const BiddingPage = () => {
     }
 
     try {
-      const res = await fetch("https://ultaauctionbackend.onrender.com/payment/create-order", {
+      const res = await fetch("http://localhost:3500/payment/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -67,7 +67,7 @@ const BiddingPage = () => {
         description: "Auction Bid Payment",
         order_id,
         handler: async function (response) {
-          const verifyRes = await fetch("https://ultaauctionbackend.onrender.com/payment/verify-payment", {
+          const verifyRes = await fetch("http://localhost:3500/payment/verify-payment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(response),
