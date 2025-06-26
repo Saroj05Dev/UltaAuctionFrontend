@@ -17,9 +17,13 @@ const BiddingPage = () => {
   const [bidAmount, setBidAmount] = useState("");
 
   const isAuctionFull = auction?.slotsFilled >= auction?.maxSlots;
-  const hasAlreadyBid = auction?.bids?.some(
-    (bid) => bid.userId === userId || bid.userId?._id === userId
-  );
+
+  const userBidCount =
+    auction?.bids?.filter(
+      (bid) => bid.userId === userId || bid.userId?._id === userId
+    )?.length || 0;
+
+  const hasReachedMaxBids = userBidCount >= 5;
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -39,8 +43,20 @@ const BiddingPage = () => {
     if (!bidAmount || bidAmount <= 0) {
       return toast.error("Please enter a valid bid amount");
     }
-    if (hasAlreadyBid) {
-      return toast.error("You have already placed a bid in this auction.");
+    
+    const bid = Number(bidAmount);
+    const min = auction?.startingBid;
+    const max = auction?.endingBid;
+
+    if (bid < min) {
+      return toast.error(`Bid must be at least ₹${min}`);
+    }
+
+    if (bid > max) {
+      return toast.error(`Bid must not exceed ₹${max}`);
+    }
+    if (hasReachedMaxBids) {
+      return toast.error("You have reached your 5 bid limit in this auction.");
     }
 
     try {
@@ -67,16 +83,19 @@ const BiddingPage = () => {
         description: "Auction Bid Payment",
         order_id,
         handler: async function (response) {
-          const verifyRes = await fetch("http://localhost:3500/payment/verify-payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(response),
-          });
+          const verifyRes = await fetch(
+            "http://localhost:3500/payment/verify-payment",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(response),
+            }
+          );
 
           const verifyData = await verifyRes.json();
 
           if (verifyData.success) {
-            toast.success("✅ Payment verified!");
+            toast.success("Payment verified!");
 
             const paymentToken = verifyData.token;
             try {
@@ -118,7 +137,7 @@ const BiddingPage = () => {
       setBidAmount={setBidAmount}
       handlePayment={handlePayment}
       isAuctionFull={isAuctionFull}
-      hasAlreadyBid={hasAlreadyBid}
+      hasReachedMaxBids={hasReachedMaxBids}
     />
   );
 };

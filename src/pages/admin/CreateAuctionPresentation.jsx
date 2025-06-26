@@ -1,13 +1,21 @@
 import React from "react";
-import AuctionSvg from '../../assets/auctionsvg.svg'
-import Layout from '../../layout/Layout'
+import AuctionSvg from "../../assets/auctionsvg.svg";
+import Layout from "../../layout/Layout";
 
-function CreateAuctionPresentation({ handleUserInput, handleFormSubmit, submitting }) {
+function CreateAuctionPresentation({
+  handleUserInput,
+  handleFormSubmit,
+  submitting,
+}) {
   return (
     <div className="flex flex-col lg:flex-row items-center justify-center gap-6 px-4 py-6 max-w-screen-xl mx-auto">
       {/* Image Section */}
       <div className="w-full lg:w-1/2 hidden md:flex justify-center">
-        <img src={AuctionSvg} alt="Auction Image" className="w-full max-w-md h-auto" />
+        <img
+          src={AuctionSvg}
+          alt="Auction Image"
+          className="w-full max-w-md h-auto"
+        />
       </div>
 
       {/* Form Section */}
@@ -44,9 +52,9 @@ function CreateAuctionPresentation({ handleUserInput, handleFormSubmit, submitti
           />
           <input
             type="number"
-            name="bidIncrement"
-            id="bidIncrement"
-            placeholder="Bid Increment"
+            name="endingBid"
+            id="endingBid"
+            placeholder="Ending Bid"
             onChange={handleUserInput}
             required
             className="w-full px-4 py-2 border rounded text-sm sm:text-base"

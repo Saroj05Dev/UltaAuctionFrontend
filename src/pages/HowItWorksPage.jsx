@@ -1,31 +1,32 @@
 import React, { useState } from "react";
 import Layout from "../layout/Layout";
+import { GiCardJoker } from "react-icons/gi";
 
 const faqs = [
   {
     question: "What is UltaAuction?",
     answer:
-      "UltaAuction is an online platform where users can place the lowest unique bid to win auctions. The user who places the lowest and unmatched bid wins the auction item.",
+      "UltaAuction is an online platform where users place the lowest unique bid to win. The one with the lowest unmatched bid takes home the prize!",
   },
   {
     question: "How does the bidding system work?",
     answer:
-      "Each user can place a bid of their choice. At the end of the auction, the bid that is the lowest and not matched by any other bidder is declared the winner.",
+      "Each participant can bid multiple times. When the auction ends, the system picks the lowest bid that was placed by only one person.",
   },
   {
     question: "Can I participate in multiple auctions?",
     answer:
-      "Yes, once logged in, you can participate in multiple ongoing auctions and track them in your dashboard.",
+      "Absolutely! You can join as many active auctions as you like and view all your bids from your user dashboard.",
   },
   {
     question: "Is there any bidding fee?",
     answer:
-      "Some auctions may have a minimal bidding fee to ensure seriousness and fair competition. Details are mentioned in the auction info.",
+      "Some auctions require a small fee to ensure fair competition. The fee (if any) is always shown on the auction page before you bid.",
   },
   {
     question: "What happens after I win an auction?",
     answer:
-      "If you win, you'll be notified immediately. You will then proceed to payment and shipping details to receive your item.",
+      "You’ll be instantly notified! From there, complete your payment and confirm shipping details to claim your reward.",
   },
 ];
 
@@ -38,33 +39,38 @@ function HowItWorks() {
 
   return (
     <Layout>
-    <div className="max-w-4xl mx-auto px-4 py-12 font-mono">
-      <h1 className="text-3xl font-bold text-center text-gray-700 mb-8">
-        How It Works
-      </h1>
+      <div className="min-h-screen bg-gradient-to-br from-zinc-900 via-black to-gray-900 py-10 px-4">
+      <div className="max-w-4xl mx-auto px-4 py-12 font-mono">
+        <h1 className="text-4xl font-bold text-center text-yellow-400 mb-10 flex items-center justify-center gap-2">
+          <GiCardJoker className="text-yellow-300 text-5xl" />
+          How It Works
+        </h1>
 
-      <div className="space-y-4">
-        {faqs.map((faq, index) => (
-          <div
-            key={index}
-            className="border rounded-xl shadow-sm transition duration-300"
-          >
-            <button
-              onClick={() => toggleAccordion(index)}
-              className="w-full flex justify-between items-center px-6 py-4 text-left text-lg font-medium text-gray-700 hover:text-blue-600 cursor-pointer"
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className="bg-zinc-900 border border-yellow-500 rounded-xl shadow-md transition duration-300"
             >
-              <span>{faq.question}</span>
-              <span>{activeIndex === index ? "−" : "+"}</span>
-            </button>
-            {activeIndex === index && (
-              <div className="px-6 pb-4 text-gray-600">
-                {faq.answer}
-              </div>
-            )}
-          </div>
-        ))}
+              <button
+                onClick={() => toggleAccordion(index)}
+                className="w-full flex justify-between items-center px-6 py-4 text-left text-lg font-semibold text-yellow-200 hover:text-white"
+              >
+                <span>{faq.question}</span>
+                <span className="text-yellow-400 text-xl">
+                  {activeIndex === index ? "−" : "+"}
+                </span>
+              </button>
+              {activeIndex === index && (
+                <div className="px-6 pb-5 text-gray-300 text-sm tracking-wide">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+      </div>
     </Layout>
   );
 }

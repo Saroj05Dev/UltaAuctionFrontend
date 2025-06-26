@@ -13,111 +13,134 @@ function Home() {
     <Layout>
       <div>
         {/* Hero Section */}
-        <section className="flex flex-col-reverse items-center justify-between px-6 py-10 gap-10 md:flex-row bg-gradient-to-l from-slate-50 to-slate-200">
+        <section className="flex flex-col-reverse items-center justify-between px-6 py-12 gap-10 md:flex-row bg-gradient-to-br from-[#1f1f1f] via-[#2e2e2e] to-[#1f1f1f] text-white relative overflow-hidden">
+          {/* Floating Glow Effect */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,215,0,0.1),transparent)] pointer-events-none"></div>
+
           {/* Left Content */}
-          <div className="w-full md:w-1/2 text-center md:text-left">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-gradient-to-r from-blue-600 to-blue-300 bg-clip-text mb-4">
-              Discover Unique Deals
+          <div className="w-full md:w-1/2 text-center md:text-left z-10">
+            <h1 className="text-4xl md:text-5xl font-black text-yellow-400 drop-shadow-md mb-4 animate-pulse">
+              🎲 Welcome to UltaAuctions 🎰
             </h1>
-            <p className="text-gray-700 mb-6 text-base sm:text-lg md:text-xl">
-              Join the live auctions, place the lowest unique bid, and win products at unbelievable prices.
+            <p className="text-gray-300 mb-6 text-lg md:text-xl">
+              Join the most thrilling auction floor. Lowest unique bid wins. Are
+              you lucky tonight?
             </p>
             <button
               onClick={() => navigate("/auctions")}
-              className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all font-semibold"
+              className="px-6 py-3 bg-yellow-500 text-black font-bold rounded-xl shadow-lg hover:bg-yellow-400 transition-all transform hover:scale-105"
             >
-              Start Bidding 🔨
+              Try Your Luck 🔥
             </button>
           </div>
 
-          {/* Right Image */}
-          <div className="w-full md:w-1/2 flex justify-center">
+          {/* Right Image with Glow */}
+          <div className="w-full md:w-1/2 flex justify-center z-10">
             <img
               src={AuctionImage}
               alt="Auction Hero"
-              className="w-full max-w-[500px] h-auto object-contain rounded-lg"
+              className="w-full max-w-[500px] h-auto object-contain rounded-lg shadow-2xl border-4 border-yellow-400"
             />
           </div>
         </section>
 
-        {/* Featured Auction */}
-        <section className="bg-white py-10 px-4 text-center">
-          <p className="text-lg text-gray-700 mb-2 font-semibold">🔥 Featured Auction</p>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-gray-800">
-            Win a Brand New iPhone 15!
+        {/* Live Featured Auction */}
+        <section className="bg-black py-10 px-4 text-center text-white relative">
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('/casino-light-bg.svg')] bg-cover opacity-10 pointer-events-none"></div>
+          <p className="text-xl font-semibold text-yellow-400 mb-2 animate-bounce">
+            🔥 Featured Auction
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-2 text-white tracking-wide">
+            Win a Brand New iPhone 15 📱
           </h2>
-          <p className="text-gray-600 mb-4 text-base sm:text-lg">
-            Starting at just ₹50. Lowest unique bid wins. Don't miss out!
+          <p className="text-gray-300 mb-4 text-lg">
+            Starting at just ₹50. Lowest unique bid takes it home. Test your
+            fate now!
           </p>
           <button
             onClick={() => navigate("/auctions")}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-semibold"
+            className="bg-yellow-500 hover:bg-yellow-400 text-black px-6 py-3 rounded-xl font-semibold transition-all transform hover:scale-105"
           >
-            View Auctions
+            Enter Auction Room 🎟️
           </button>
         </section>
 
         {/* Auction Strategy Section */}
-        <section className="py-10 px-4 bg-gradient-to-l from-slate-50 to-slate-200">
+        <section className="py-14 px-4 bg-gradient-to-tr from-black via-[#111] to-black text-white">
           <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row gap-10">
             {/* Left Image */}
             <div className="w-full lg:w-1/2 flex justify-center">
               <img
                 src={AuctionImage2}
-                alt="Auction"
-                className="w-full max-w-md lg:max-w-[500px] h-auto object-contain rounded-lg"
+                alt="Auction Strategy"
+                className="w-full max-w-md lg:max-w-[500px] h-auto object-contain rounded-2xl border-4 border-yellow-400 shadow-xl"
               />
             </div>
 
             {/* Right Text Content */}
             <div className="w-full lg:w-1/2">
-              <h2 className="text-2xl sm:text-4xl font-extrabold mb-6 text-transparent bg-gradient-to-l from-blue-300 to-blue-500 bg-clip-text text-center lg:text-left">
-                Place the Smartest Bid, Win the Best Deals!
+              <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-yellow-300">
+                Bid Smart. Win Big. 💡
               </h2>
-              <p className="text-gray-600 text-base sm:text-lg mb-6 text-center lg:text-left">
-                Step into the world of strategic bidding where only the most unique bid wins.
-                Experience the thrill of auctions like never before.
+              <p className="text-gray-300 text-lg mb-6">
+                Experience a strategic thrill! It's not about the highest bid.
+                It's about the rarest one.
               </p>
 
-              <ul className="space-y-4 text-base sm:text-lg text-gray-800 font-semibold mb-8">
-                <li>🧠 Lowest Unique Bid Wins</li>
-                <li>⚡ Real-Time Bidding Updates</li>
-                <li>🏆 Fair & Transparent Auctions</li>
-                <li>🔒 Secure Participation</li>
+              <ul className="space-y-3 text-lg font-semibold text-yellow-200">
+                <li>🧠 Unique Bids, Real Prizes</li>
+                <li>⏱️ Real-Time Leaderboards</li>
+                <li>🎯 Transparent Winning Logic</li>
+                <li>🔐 Secure Payments & User Safety</li>
               </ul>
 
-              {/* Steps Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Step-by-step */}
+              <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Step 1 */}
-                <div className="bg-gradient-to-br from-yellow-50 to-white p-4 rounded-xl shadow-md text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-yellow-100 flex items-center justify-center rounded-full">
+                <div className="bg-gradient-to-br from-[#222] to-[#111] p-5 rounded-2xl shadow-md text-center border border-yellow-500">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-yellow-100 flex items-center justify-center rounded-full shadow-md">
                     <img src={PlaceBid} alt="Place Bid" className="w-8 h-8" />
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">Place Your Bid</h3>
-                  <p className="text-gray-600 text-sm">
-                    Choose your number wisely. The lowest unique bid gets the prize!
+                  <h3 className="text-xl font-bold text-yellow-300 mb-2">
+                    1️⃣ Place Bid
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    Pick your lucky number! Only the most unique bid will win.
                   </p>
                 </div>
 
                 {/* Step 2 */}
-                <div className="bg-gradient-to-br from-yellow-50 to-white p-4 rounded-xl shadow-md text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-yellow-100 flex items-center justify-center rounded-full">
-                    <img src={TrackAuction} alt="Track Auction" className="w-8 h-8" />
+                <div className="bg-gradient-to-br from-[#222] to-[#111] p-5 rounded-2xl shadow-md text-center border border-yellow-500">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-yellow-100 flex items-center justify-center rounded-full shadow-md">
+                    <img
+                      src={TrackAuction}
+                      alt="Track Auction"
+                      className="w-8 h-8"
+                    />
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">Track the Auction</h3>
-                  <p className="text-gray-600 text-sm">
-                    Monitor real-time updates and stay ahead of other bidders.
+                  <h3 className="text-xl font-bold text-yellow-300 mb-2">
+                    2️⃣ Track It
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    Stay updated. Monitor your bid in real-time as others place
+                    theirs.
                   </p>
                 </div>
 
                 {/* Step 3 */}
-                <div className="bg-gradient-to-br from-yellow-50 to-white p-4 rounded-xl shadow-md text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-yellow-100 flex items-center justify-center rounded-full">
-                    <img src={WinAuction} alt="Win Auction" className="w-8 h-8" />
+                <div className="bg-gradient-to-br from-[#222] to-[#111] p-5 rounded-2xl shadow-md text-center border border-yellow-500">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-yellow-100 flex items-center justify-center rounded-full shadow-md">
+                    <img
+                      src={WinAuction}
+                      alt="Win Auction"
+                      className="w-8 h-8"
+                    />
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">Win the Deal</h3>
-                  <p className="text-gray-600 text-sm">
-                    Be the smartest bidder and grab your favorite item at an unbeatable price!
+                  <h3 className="text-xl font-bold text-yellow-300 mb-2">
+                    3️⃣ Claim Victory
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    Your time to shine! Win the product at a jaw-dropping price!
                   </p>
                 </div>
               </div>
