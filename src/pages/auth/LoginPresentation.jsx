@@ -3,77 +3,78 @@ import { Link } from "react-router-dom";
 
 function LoginPresentation({ handleFormSubmit, handleUserInput }) {
   return (
-    <>
-      <section className="text-gray-600 body-font">
-        <div className="flex flex-wrap items-center h-screen px-10 py-6 mx-auto">
-          <div className="hidden p-0 lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 md:block">
-            {/** svg here */}
-            <img
-              src={SignInIllustration}
-              alt="Sign In Illustration"
-              className="h-[500px]"
+    <section className="min-h-screen bg-gradient-to-br from-[#1A1A40] to-[#0F0F1C] text-white font-mono">
+      <div className="flex flex-col md:flex-row items-center justify-center h-full max-w-6xl mx-auto px-4 py-12 gap-10">
+        {/* Illustration */}
+        <div className="hidden md:block md:w-1/2">
+          <img
+            src={SignInIllustration}
+            alt="Sign In Illustration"
+            className="w-full max-h-[500px] object-contain animate-pulse"
+          />
+        </div>
+
+        {/* Login Form */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleFormSubmit(e);
+          }}
+          className="bg-[#222233] p-8 rounded-2xl shadow-lg w-full md:w-1/2 lg:w-1/3 border border-purple-600"
+        >
+          <h2 className="text-3xl font-bold text-center text-yellow-300 mb-6">
+            🎲 Sign In
+          </h2>
+
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-sm mb-1 text-purple-300">
+              Email <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              onChange={handleUserInput}
+              required
+              placeholder="you@example.com"
+              className="w-full p-3 rounded-lg bg-[#1E1E2F] text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
           </div>
 
-          <form className="flex flex-col w-full p-8 mt-10 bg-gray-100 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
-            <h2 className="mb-5 text-lg font-medium text-gray-900 title-font">
-              Sign in
-            </h2>
+          <div className="mb-6">
+            <label htmlFor="password" className="block text-sm mb-1 text-purple-300">
+              Password <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              onChange={handleUserInput}
+              required
+              placeholder="••••••••"
+              className="w-full p-3 rounded-lg bg-[#1E1E2F] text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            />
+          </div>
 
-            <div className="relative mb-4">
-              <label
-                htmlFor="email"
-                className="text-sm leading-7 text-gray-600"
-              >
-                Email <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                onChange={handleUserInput}
-                required
-                placeholder="John@example.com"
-                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-              />
-            </div>
+          <button
+            type="submit"
+            className="w-full py-3 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-lg text-black font-bold hover:from-yellow-500 hover:to-yellow-700 transition"
+          >
+            Sign In
+          </button>
 
-            <div className="relative mb-4">
-              <label
-                htmlFor="password"
-                className="text-sm leading-7 text-gray-600"
-              >
-                Password <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                onChange={handleUserInput}
-                required
-                placeholder="Enter your password"
-                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-              />
-            </div>
-
-            <button
-              type="submit"
-              onClick={handleFormSubmit}
-              className="w-full px-8 py-2 text-lg text-white bg-blue-500 border-0 rounded focus:outline-none hover:bg-blue-600"
+          <p className="mt-4 text-sm text-center text-gray-300">
+            Don’t have an account?{" "}
+            <Link
+              to="/signup"
+              className="text-yellow-400 hover:text-yellow-500 font-semibold underline"
             >
-              Sign In
-            </button>
-
-            <p className="mt-3 text-xs text-gray-500">
-              Donot have an account ?
-              <Link to="/signup" className="text-blue-500 font-semibold">
-                Sign Up
-              </Link>
-            </p>
-          </form>
-        </div>
-      </section>
-    </>
+              Sign Up
+            </Link>
+          </p>
+        </form>
+      </div>
+    </section>
   );
 }
 
