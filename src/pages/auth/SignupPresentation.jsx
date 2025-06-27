@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import SignUpIllustration from "../../assets/signup.jpg";
 
-function SignupPresentation({ handleUserInput, handleFormSubmit }) {
+function SignupPresentation({ handleUserInput, handleFormSubmit, loading }) {
   return (
     <section className="min-h-screen bg-gradient-to-br from-[#1A1A40] to-[#0F0F1C] text-white font-mono">
       <div className="flex flex-col md:flex-row items-center justify-center h-full max-w-6xl mx-auto px-4 py-12 gap-10">
@@ -28,7 +28,10 @@ function SignupPresentation({ handleUserInput, handleFormSubmit }) {
 
           {/* First Name */}
           <div className="mb-4">
-            <label htmlFor="firstName" className="block text-sm mb-1 text-purple-300">
+            <label
+              htmlFor="firstName"
+              className="block text-sm mb-1 text-purple-300"
+            >
               First Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -45,7 +48,10 @@ function SignupPresentation({ handleUserInput, handleFormSubmit }) {
 
           {/* Last Name */}
           <div className="mb-4">
-            <label htmlFor="lastName" className="block text-sm mb-1 text-purple-300">
+            <label
+              htmlFor="lastName"
+              className="block text-sm mb-1 text-purple-300"
+            >
               Last Name
             </label>
             <input
@@ -61,7 +67,10 @@ function SignupPresentation({ handleUserInput, handleFormSubmit }) {
 
           {/* Email */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm mb-1 text-purple-300">
+            <label
+              htmlFor="email"
+              className="block text-sm mb-1 text-purple-300"
+            >
               Email <span className="text-red-500">*</span>
             </label>
             <input
@@ -77,7 +86,10 @@ function SignupPresentation({ handleUserInput, handleFormSubmit }) {
 
           {/* Mobile Number */}
           <div className="mb-4">
-            <label htmlFor="mobileNumber" className="block text-sm mb-1 text-purple-300">
+            <label
+              htmlFor="mobileNumber"
+              className="block text-sm mb-1 text-purple-300"
+            >
               Mobile Number <span className="text-red-500">*</span>
             </label>
             <input
@@ -94,7 +106,10 @@ function SignupPresentation({ handleUserInput, handleFormSubmit }) {
 
           {/* Password */}
           <div className="mb-6">
-            <label htmlFor="password" className="block text-sm mb-1 text-purple-300">
+            <label
+              htmlFor="password"
+              className="block text-sm mb-1 text-purple-300"
+            >
               Password <span className="text-red-500">*</span>
             </label>
             <input
@@ -111,9 +126,38 @@ function SignupPresentation({ handleUserInput, handleFormSubmit }) {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-3 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-lg text-black font-bold hover:from-yellow-500 hover:to-yellow-700 transition"
+            disabled={loading}
+            className={`w-full py-3 rounded-lg text-black font-bold transition ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700"
+            }`}
           >
-            Create Account
+            {loading ? (
+              <div className="flex items-center justify-center gap-2">
+                <svg
+                  className="animate-spin h-5 w-5 text-black"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v8z"
+                  ></path>
+                </svg>
+                Creating...
+              </div>
+            ) : (
+              "Create Account"
+            )}
           </button>
 
           {/* Redirect to Login */}

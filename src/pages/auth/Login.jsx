@@ -15,6 +15,8 @@ function Login() {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   function handleUserInput(e) {
     const { name, value } = e.target;
     setLoginData({
@@ -24,19 +26,22 @@ function Login() {
   }
 
   async function handleFormSubmit(e) {
-    e.preventDefault(); // 🔒 Prevent full-page reload
-    console.log(loginData);
+    e.preventDefault(); 
+
+    if(loading) return;
+
+    setLoading(true);
 
     // Add validations for the form input
     if (!loginData.email || !loginData.password) {
       toast.error("Missing values from the form");
-      return;
+      return setLoading(false);
     }
 
     // check email
     if (!loginData.email.includes("@" || !loginData.email.includes("."))) {
       toast.error("Please fill a valid email");
-      return;
+      return setLoading(false);
     }
 
     const apiResponse = await dispatch(login(loginData));
@@ -52,12 +57,14 @@ function Login() {
         navigate("/");
       }
     }
+    setLoading(false);
   }
 
   return (
     <LoginPresentation
       handleFormSubmit={handleFormSubmit}
       handleUserInput={handleUserInput}
+      loading={loading}
     />
   );
 }
