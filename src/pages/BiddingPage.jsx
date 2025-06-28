@@ -12,9 +12,11 @@ const BiddingPage = () => {
   const dispatch = useDispatch();
   const authData = useSelector((state) => state.auth?.data);
   const userId = authData?._id;
-  const auction = useSelector((state) => state.auction.auctions);
+  const auction = useSelector((state) => state.auction.singleAuction);
 
   const [bidAmount, setBidAmount] = useState("");
+
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const isAuctionFull = auction?.slotsFilled >= auction?.maxSlots;
 
@@ -32,18 +34,27 @@ const BiddingPage = () => {
     document.body.appendChild(script);
   }, []);
 
+  const refetchAuctionData = async () => {
+    await dispatch(fetchAuctionById(id));
+    await dispatch(fetchBids(id));
+    setRefreshKey((prev) => prev + 1); // Force re-render
+  };
+
   useEffect(() => {
     if (id) {
-      dispatch(fetchAuctionById(id));
-      dispatch(fetchBids(id));
+      refetchAuctionData();
     }
   }, [dispatch, id]);
+
+  useEffect(() => {
+  console.log("Updated auction:", auction?.bids?.length);
+}, [auction?.bids?.length]);
 
   const handlePayment = async () => {
     if (!bidAmount || bidAmount <= 0) {
       return toast.error("Please enter a valid bid amount");
     }
-    
+
     const bid = Number(bidAmount);
     const min = auction?.startingBid;
     const max = auction?.endingBid;
@@ -104,8 +115,9 @@ const BiddingPage = () => {
               ).unwrap();
               toast.success("Bid placed successfully!");
               setBidAmount("");
-              await dispatch(fetchAuctionById(id));
-              navigate(0);
+              setTimeout(async () => {
+                await refetchAuctionData();
+              }, 500);
             } catch (err) {
               toast.error(err || "Payment succeeded but bid failed");
             }
@@ -123,7 +135,7 @@ const BiddingPage = () => {
         },
         method: {
           upi: true, // This forces UPI to show
-        }
+        },
       };
 
       const rzp = new window.Razorpay(options);
@@ -135,6 +147,7 @@ const BiddingPage = () => {
 
   return (
     <BiddingPagePresentation
+      key={auction?.id || refreshKey} // this will force re-render
       auction={auction}
       bidAmount={bidAmount}
       setBidAmount={setBidAmount}

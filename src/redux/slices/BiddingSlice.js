@@ -9,23 +9,24 @@ const initialState = {
   error: null,
 };
 
-
 export const placeBid = createAsyncThunk(
   "bid/placeBid",
   async ({ auctionId, userId, bidAmount, paymentToken }, thunkAPI) => {
     try {
-      const response = await axiosInstance.post('/bids', {
-        auctionId,
-        userId,
-        bidAmount
-      },
-      {
-        headers: {
-          "authorization" : paymentToken // Add the payment token to the headers
+      const response = await axiosInstance.post(
+        "/bids",
+        {
+          auctionId,
+          userId,
+          bidAmount,
+        },
+        {
+          headers: {
+            authorization: paymentToken, // Add the payment token to the headers
+          },
         }
-      } 
-    );
-      
+      );
+
       if (response.data.success) {
         toast.success(response.data.message);
       } else {
@@ -35,11 +36,12 @@ export const placeBid = createAsyncThunk(
       return response.data; // just return the data
     } catch (error) {
       console.log(error);
-      return thunkAPI.rejectWithValue(error?.response?.data?.message || "Bid failed");
+      return thunkAPI.rejectWithValue(
+        error?.response?.data?.message || "Bid failed"
+      );
     }
   }
 );
-
 
 export const fetchBids = createAsyncThunk("bid/fetchBid", async (auctionId) => {
   try {
@@ -56,17 +58,20 @@ export const fetchBids = createAsyncThunk("bid/fetchBid", async (auctionId) => {
   }
 });
 
-// ✅ New: Get All Bids by Logged-in User
-export const fetchMyBids = createAsyncThunk("bid/fetchMyBids", async (_, thunkAPI) => {
-  try {
-    const response = await axiosInstance.get("/bids/my-bids/all");
-    return response.data.data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(
-      error.response?.data?.message || error.message
-    );
+// Get All Bids by Logged-in User
+export const fetchMyBids = createAsyncThunk(
+  "bid/fetchMyBids",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get("/bids/my-bids/all");
+      return response.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message
+      );
+    }
   }
-});
+);
 
 const biddingSlice = createSlice({
   name: "bidding",
@@ -77,9 +82,9 @@ const biddingSlice = createSlice({
       .addCase(placeBid.pending, (state) => {
         state.loading = true;
       })
-      .addCase(placeBid.fulfilled, (state, action) => {
+      .addCase(placeBid.fulfilled, (state) => {
         state.loading = false;
-        state.bids.push(action.payload.data); // Add the new bid
+        // state.bids.push(action.payload.data); // Add the new bid
       })
       .addCase(placeBid.rejected, (state, action) => {
         state.loading = false;
@@ -90,13 +95,14 @@ const biddingSlice = createSlice({
       })
       .addCase(fetchBids.fulfilled, (state, action) => {
         state.loading = false;
-        state.bids = action.payload.data; // assuming payload = { success, data }
+        state.bids = Array.isArray(action.payload.data)
+          ? action.payload.data
+          : [];
       })
       .addCase(fetchBids.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
-      // ✅ Extra: fetchMyBids handling
       .addCase(fetchMyBids.pending, (state) => {
         state.loading = true;
         state.error = null;

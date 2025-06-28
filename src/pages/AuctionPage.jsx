@@ -9,10 +9,16 @@ function AuctionsPage() {
   const { auctions } = useSelector((state) => state.auction);
   const dispatch = useDispatch();
   const [filteredAuctions, setFilteredAuctions] = useState([]);
+  const [loading, setLoading] = useState(true); // 🔁 Loader state
 
   useEffect(() => {
-    dispatch(fetchAuctions());
-  }, []);
+    const loadAuctions = async () => {
+      setLoading(true);
+      await dispatch(fetchAuctions());
+      setLoading(false);
+    };
+    loadAuctions();
+  }, [dispatch]);
 
   useEffect(() => {
     setFilteredAuctions(auctions);
@@ -50,19 +56,27 @@ function AuctionsPage() {
             💰 Browse Live Auctions 💰
           </h1>
 
-          <AuctionFilters onFilter={applyFilters} />
+          {loading ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="w-12 h-12 border-4 border-yellow-300 border-dashed rounded-full animate-spin"></div>
+            </div>
+          ) : (
+            <>
+              <AuctionFilters onFilter={applyFilters} />
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {Array.isArray(filteredAuctions) && filteredAuctions.length > 0 ? (
-              filteredAuctions.map((auction) => (
-                <AuctionCard key={auction._id} auction={auction} />
-              ))
-            ) : (
-              <p className="text-white text-center col-span-full">
-                No auctions available
-              </p>
-            )}
-          </div>
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {filteredAuctions?.length > 0 ? (
+                  filteredAuctions.map((auction) => (
+                    <AuctionCard key={auction._id} auction={auction} />
+                  ))
+                ) : (
+                  <p className="text-white text-center col-span-full">
+                    No auctions available
+                  </p>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </Layout>

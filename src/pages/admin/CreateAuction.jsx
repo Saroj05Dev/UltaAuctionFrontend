@@ -71,9 +71,9 @@ function CreateAuction() {
       return;
     }
 
-    if (auctionState.title.length < 7 || auctionState.title.length > 15) {
+    if (auctionState.title.length < 5 || auctionState.title.length > 30) {
       toast.error(
-        "Title should be atleast 3 characters long and maximum 15 characters long"
+        "Title should be atleast 5 characters long and maximum 30 characters long"
       );
       return;
     }

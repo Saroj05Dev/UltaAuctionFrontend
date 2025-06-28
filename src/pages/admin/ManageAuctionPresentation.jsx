@@ -39,7 +39,7 @@ const ManageAuctionsPresentation = ({
               </tr>
             ) : auctions.length > 0 ? (
               auctions.map((auction) => (
-                <tr key={auction._id} className="border-t">
+                <tr key={auction._id || Math.random()} className="border-t">
                   <td className="px-4 py-2 break-all">{auction._id}</td>
                   <td className="px-4 py-2">{auction.title}</td>
                   <td className="px-4 py-2 capitalize">{auction.status}</td>
