@@ -13,6 +13,7 @@ function Login() {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
+    mobileNumber: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -26,27 +27,53 @@ function Login() {
   }
 
   async function handleFormSubmit(e) {
-    e.preventDefault(); 
-
-    if(loading) return;
-
+    e.preventDefault();
+    if (loading) return;
     setLoading(true);
 
-    // Add validations for the form input
-    if (!loginData.email || !loginData.password) {
-      toast.error("Missing values from the form");
+    const { email, password, mobileNumber } = loginData;
+
+    if (!password) {
+      toast.error("Password is required.");
       return setLoading(false);
     }
 
-    // check email
-    if (!loginData.email.includes("@" || !loginData.email.includes("."))) {
-      toast.error("Please fill a valid email");
+    if (!email && !mobileNumber) {
+      toast.error("Please enter either Email or Mobile Number.");
       return setLoading(false);
     }
 
-    const apiResponse = await dispatch(login(loginData));
-    console.log("api response: ", apiResponse);
-    // check role and redirect accordingly
+    // Validate email if it's filled
+    if (email && (!email.includes("@") || !email.includes("."))) {
+      toast.error("Invalid email address.");
+      return setLoading(false);
+    }
+
+    // Validate mobile if it's filled
+    if (
+      mobileNumber &&
+      (mobileNumber.length < 10 || mobileNumber.length > 13)
+    ) {
+      toast.error("Invalid phone number.");
+      return setLoading(false);
+    }
+
+    // Only send the relevant field
+    const payload = {
+      password,
+      ...(email ? { email } : {}),
+      ...(mobileNumber ? { mobileNumber } : {}),
+    };
+
+    const apiResponse = await dispatch(login(payload));
+
+    const errorMessage = apiResponse?.payload?.response?.data?.message;
+
+    if (!apiResponse?.payload?.data?.success && errorMessage) {
+      toast.error(errorMessage);
+      return setLoading(false);
+    }
+
     const isSuccess = apiResponse?.payload?.data?.success;
     const userRole = apiResponse?.payload?.data?.data?.userRole;
 
@@ -57,6 +84,7 @@ function Login() {
         navigate("/");
       }
     }
+
     setLoading(false);
   }
 

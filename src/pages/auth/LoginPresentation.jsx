@@ -35,8 +35,23 @@ function LoginPresentation({ handleFormSubmit, handleUserInput, loading }) {
               id="email"
               name="email"
               onChange={handleUserInput}
-              required
               placeholder="you@example.com"
+              className="w-full p-3 rounded-lg bg-[#1E1E2F] text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            />
+          </div>
+
+          <h1 className="text-purple-300 text-xl mb-2">Or</h1>
+
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-sm mb-1 text-purple-300">
+              Phone Number <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="mobileNumber"
+              id="mobileNumber"
+              name="mobileNumber"
+              onChange={handleUserInput}
+              placeholder="+910000000000"
               className="w-full p-3 rounded-lg bg-[#1E1E2F] text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
           </div>
@@ -50,7 +65,6 @@ function LoginPresentation({ handleFormSubmit, handleUserInput, loading }) {
               id="password"
               name="password"
               onChange={handleUserInput}
-              required
               placeholder="••••••••"
               className="w-full p-3 rounded-lg bg-[#1E1E2F] text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />

@@ -19,7 +19,7 @@ axiosInstance.interceptors.response.use(
         localStorage.clear();
         toast.info("Session expired. Please login again.");
         setTimeout(() => {
-        window.location.reload(); // 🔁 Reload page
+        window.location.reload(); 
       }, 1500);
       return Promise.reject(error);
       });
