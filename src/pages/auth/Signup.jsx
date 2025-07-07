@@ -4,12 +4,15 @@ import SignupPresentation from "./SignupPresentation";
 import { useDispatch } from "react-redux";
 import { createAccount, login } from "../../redux/slices/AuthSlice";
 import { useNavigate } from "react-router-dom";
-import { FaLandMineOn } from "react-icons/fa6";
+import axiosInstance from "../../helpers/axiosInstance";
 // Container for the signup page
 function Signup() {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const [otp, setOtp] = useState("");
+  const [isOTPSent, setIsOTPSent] = useState(false);
 
   const [signUpState, setSignUpState] = useState({
     firstName: "",
@@ -20,6 +23,20 @@ function Signup() {
   });
 
   const [loading, setLoading] = useState(false);
+
+  const sendOtpHandler = async () => {
+    try {
+      console.log("Sending OTP to:", signUpState.mobileNumber);
+      const res = await axiosInstance.post("/otp/send", {
+        phone: signUpState.mobileNumber,
+      });
+      setIsOTPSent(true);
+      toast.success("OTP sent!");
+    } catch (err) {
+      console.error(err); // helpful for debugging
+      toast.error(err.response?.data?.message || "Failed to send OTP");
+    }
+  };
 
   function handleUserInput(e) {
     const { name, value } = e.target;
@@ -75,8 +92,22 @@ function Signup() {
       );
       return setLoading(false);
     }
+    // check otp validation
 
+    // Step 1: Verify OTP
+    const verifyRes = await axiosInstance.post("/otp/verify-otp", {
+      phone: signUpState.mobileNumber,
+      otp: otp,
+    });
+
+    if (!verifyRes.data.success) {
+      toast.error("Invalid or expired OTP");
+      return setLoading(false);
+    }
+
+    // Step 2: Create Account
     const apiResponse = await dispatch(createAccount(signUpState));
+
     if (apiResponse?.payload?.data?.success) {
       const loginResponse = await dispatch(
         login({
@@ -88,6 +119,8 @@ function Signup() {
       if (loginResponse?.payload?.data?.success) {
         navigate("/");
       }
+    } else {
+      toast.error(apiResponse?.payload?.data?.message || "Signup failed");
     }
     setLoading(false);
   }
@@ -96,6 +129,10 @@ function Signup() {
     <SignupPresentation
       handleFormSubmit={handleFormSubmit}
       handleUserInput={handleUserInput}
+      sendOtpHandler={sendOtpHandler}
+      otp={otp}
+      setOtp={setOtp}
+      isOTPSent={isOTPSent}
       loading={loading}
     />
   );

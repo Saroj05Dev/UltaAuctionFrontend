@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
 import SignUpIllustration from "../../assets/signup.jpg";
 
-function SignupPresentation({ handleUserInput, handleFormSubmit, loading }) {
+function SignupPresentation({
+  handleUserInput,
+  handleFormSubmit,
+  loading,
+  sendOtpHandler,
+  otp,
+  setOtp,
+  isOTPSent,
+}) {
   return (
     <section className="min-h-screen bg-gradient-to-br from-[#1A1A40] to-[#0F0F1C] text-white font-mono">
       <div className="flex flex-col md:flex-row items-center justify-center h-full max-w-6xl mx-auto px-4 py-12 gap-10">
@@ -103,6 +111,34 @@ function SignupPresentation({ handleUserInput, handleFormSubmit, loading }) {
               className="w-full p-3 bg-[#1E1E2F] text-white border border-purple-500 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
           </div>
+
+          {isOTPSent ? (
+            <div className="mb-4">
+              <label
+                htmlFor="otp"
+                className="block text-sm mb-1 text-purple-300"
+              >
+                OTP <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="otp"
+                name="otp"
+                placeholder="Enter OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                className="w-full p-3 bg-[#1E1E2F] text-white border border-purple-500 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              />
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={sendOtpHandler}
+              className="w-full py-2 bg-yellow-500 hover:bg-yellow-600 text-black rounded font-semibold mb-4"
+            >
+              Send OTP
+            </button>
+          )}
 
           {/* Password */}
           <div className="mb-6">
