@@ -133,9 +133,6 @@ const BiddingPage = () => {
         theme: {
           color: "#3399cc",
         },
-        method: {
-          upi: true, // This forces UPI to show
-        },
       };
 
       const rzp = new window.Razorpay(options);
