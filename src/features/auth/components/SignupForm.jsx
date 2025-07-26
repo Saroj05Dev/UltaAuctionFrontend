@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import SignUpIllustration from "../../assets/signup.jpg";
+import SignUpIllustration from "../../../assets/signup.jpg";
 
-function SignupPresentation({
+function SignupForm({
   handleUserInput,
   handleFormSubmit,
   loading,
@@ -212,4 +212,4 @@ function SignupPresentation({
   );
 }
 
-export default SignupPresentation;
+export default SignupForm;

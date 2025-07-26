@@ -1,4 +1,4 @@
-import SignInIllustration from "../../assets/signin.svg";
+import SignInIllustration from "../../../assets/signin.svg";
 import { Link } from "react-router-dom";
 
 function LoginPresentation({ handleFormSubmit, handleUserInput, loading }) {

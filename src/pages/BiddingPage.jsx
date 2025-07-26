@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { fetchAuctionById } from "../redux/slices/AuctionSlice";
 import { fetchBids, placeBid } from "../redux/slices/BiddingSlice";
 import BiddingPagePresentation from "./BiddingPagePresentation";
@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 
 const BiddingPage = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const authData = useSelector((state) => state.auth?.data);
   const userId = authData?._id;
@@ -71,7 +70,7 @@ const BiddingPage = () => {
     }
 
     try {
-      const res = await fetch("https://ultaauctionbackend-1.onrender.com/payment/create-order", {
+      const res = await fetch("http://localhost:3500/payment/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -95,7 +94,7 @@ const BiddingPage = () => {
         order_id,
         handler: async function (response) {
           const verifyRes = await fetch(
-            "https://ultaauctionbackend-1.onrender.com/payment/verify-payment",
+            "http://localhost:3500/payment/verify-payment",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -138,6 +137,7 @@ const BiddingPage = () => {
       const rzp = new window.Razorpay(options);
       rzp.open();
     } catch (err) {
+      console.error(err);
       toast.error("Payment initiation failed");
     }
   };

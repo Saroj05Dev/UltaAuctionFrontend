@@ -1,9 +1,5 @@
 import "./App.css";
 import Home from "./pages/Home";
-import Denied from "./pages/auth/Denied";
-import Signup from "./pages/auth/Signup";
-import Login from "./pages/auth/Login";
-import AuctionsPage from "./pages/AuctionPage";
 import BiddingPage from "./pages/BiddingPage";
 import CreateAuction from "./pages/admin/CreateAuction";
 import AdminLayout from "./pages/admin/AdminLayout";
@@ -14,13 +10,17 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import UpdateAuction from "./pages/admin/UpdateAuction";
 import Users from "./pages/admin/UsersPage";
 import Reports from "./pages/admin/Reports";
-import RequireAuth from "./pages/auth/RequireAuth";
 import AdminRoutes from "./components/AdminRoutes";
 import HowItWorks from "./pages/HowItWorksPage";
 import About from "./pages/AboutPage";
 import AdminDeclareWinner from "./pages/admin/DeclareWinner";
 import LeaderboardPage from "./pages/LeaderboardPage";
 import MyBidsPage from "./pages/MyBidsPage";
+import LoginPage from "./features/auth/pages/LoginPage";
+import RequireAuth from "./features/auth/RequireAuth";
+import Denied from "./pages/Denied";
+import SignupPage from "./features/auth/pages/SignupPage";
+import AuctionsPage from "./features/auction/pages/AuctionsPage";
 
 function App() {
   return (
@@ -29,8 +29,8 @@ function App() {
         {/** Public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/denied" element={<Denied />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/about" element={<About />} />
 
@@ -40,7 +40,6 @@ function App() {
           <Route path="/auctions" element={<AuctionsPage />} />
           <Route path="/auction/:auctionId/leaderboard" element={<LeaderboardPage />} />
           <Route path="/my-bids" element={<MyBidsPage />} />
-
         </Route>
 
           <Route element={<AdminRoutes />}>

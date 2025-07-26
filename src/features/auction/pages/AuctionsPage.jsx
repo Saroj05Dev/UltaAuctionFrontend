@@ -1,52 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import useAuctionList from "../hooks/useAuctionList";
 import AuctionFilters from "../components/AuctionFilters";
 import AuctionCard from "../components/AuctionCard";
-import { fetchAuctions } from "../redux/slices/AuctionSlice";
-import Layout from "../layout/Layout";
+import Layout from "../../../layout/Layout";
 
 function AuctionsPage() {
-  const { auctions } = useSelector((state) => state.auction);
-  const dispatch = useDispatch();
-  const [filteredAuctions, setFilteredAuctions] = useState([]);
-  const [loading, setLoading] = useState(true); // 🔁 Loader state
-
-  useEffect(() => {
-    const loadAuctions = async () => {
-      setLoading(true);
-      await dispatch(fetchAuctions());
-      setLoading(false);
-    };
-    loadAuctions();
-  }, [dispatch]);
-
-  useEffect(() => {
-    setFilteredAuctions(auctions);
-  }, [auctions]);
-
-  function applyFilters({ status, minBid, maxBid, search }) {
-    let filtered = auctions;
-
-    if (status) {
-      filtered = filtered.filter((auction) => auction.status === status);
-    }
-    if (minBid) {
-      filtered = filtered.filter(
-        (auction) => auction.startingBid >= parseFloat(minBid)
-      );
-    }
-    if (maxBid) {
-      filtered = filtered.filter(
-        (auction) => auction.startingBid <= parseFloat(maxBid)
-      );
-    }
-    if (search) {
-      filtered = filtered.filter((auction) =>
-        auction.title.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-    setFilteredAuctions(filtered);
-  }
+  const { filteredAuctions, applyFilters, loading } = useAuctionList();
 
   return (
     <Layout>
