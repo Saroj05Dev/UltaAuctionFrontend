@@ -1,8 +1,11 @@
+import { LogInIcon } from "lucide-react";
 import SignInIllustration from "../../../assets/signin.svg";
 import { Link } from "react-router-dom";
+import Layout from "../../../layout/Layout";
 
-function LoginPresentation({ handleFormSubmit, handleUserInput, loading }) {
+function LoginPresentation({ handleFormSubmit, handleUserInput, loading, loginData }) {
   return (
+    <Layout>
     <section className="min-h-screen bg-gradient-to-br from-[#1A1A40] to-[#0F0F1C] text-white font-mono">
       <div className="flex flex-col md:flex-row items-center justify-center h-full max-w-6xl mx-auto px-4 py-12 gap-10">
         {/* Illustration */}
@@ -23,7 +26,7 @@ function LoginPresentation({ handleFormSubmit, handleUserInput, loading }) {
           className="bg-[#222233] p-8 rounded-2xl shadow-lg w-full md:w-1/2 lg:w-1/3 border border-purple-600"
         >
           <h2 className="text-3xl font-bold text-center text-yellow-300 mb-6">
-            🚪 Sign In
+            <LogInIcon size={40} className="inline"/> Sign In
           </h2>
 
           <div className="mb-4">
@@ -50,8 +53,9 @@ function LoginPresentation({ handleFormSubmit, handleUserInput, loading }) {
               type="mobileNumber"
               id="mobileNumber"
               name="mobileNumber"
+              value={loginData.mobileNumber}
               onChange={handleUserInput}
-              placeholder="+910000000000"
+              // placeholder="+910000000000"
               className="w-full p-3 rounded-lg bg-[#1E1E2F] text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
           </div>
@@ -64,8 +68,9 @@ function LoginPresentation({ handleFormSubmit, handleUserInput, loading }) {
               type="password"
               id="password"
               name="password"
+              value={loginData.password}
               onChange={handleUserInput}
-              placeholder="••••••••"
+              // placeholder="••••••••"
               className="w-full p-3 rounded-lg bg-[#1E1E2F] text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
           </div>
@@ -118,6 +123,7 @@ function LoginPresentation({ handleFormSubmit, handleUserInput, loading }) {
         </form>
       </div>
     </section>
+    </Layout>
   );
 }
 

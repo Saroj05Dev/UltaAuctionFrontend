@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import SignUpIllustration from "../../../assets/signup.jpg";
+import RegisterIllustration from "../../../assets/Register.svg";
+import { SiGnuprivacyguard } from "react-icons/si";
 
 function SignupForm({
   handleUserInput,
@@ -16,9 +17,9 @@ function SignupForm({
         {/* Left Illustration */}
         <div className="hidden md:block md:w-1/2">
           <img
-            src={SignUpIllustration}
+            src={RegisterIllustration}
             alt="Sign Up Illustration"
-            className="w-full max-h-[500px] object-contain animate-fadeIn"
+            className="w-full max-h-[450px] object-contain animate-fadeIn"
           />
         </div>
 
@@ -31,7 +32,7 @@ function SignupForm({
           className="bg-[#222233] p-8 rounded-2xl shadow-xl w-full md:w-1/2 lg:w-1/3 border border-purple-600"
         >
           <h2 className="text-3xl font-bold text-center text-yellow-300 mb-6">
-            📝 Create Account
+            <SiGnuprivacyguard size={35} className="inline"/> Create Account
           </h2>
 
           {/* First Name */}

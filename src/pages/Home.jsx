@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import AuctionImage from "../assets/AuctionImg1.jpg";
 import AuctionImage2 from "../assets/auction2.jpg";
-import PlaceBid from "../assets/place-your-bid.svg";
-import TrackAuction from "../assets/track-the-auction.svg";
-import WinAuction from "../assets/win-the-deal.svg";
 import Layout from "../layout/Layout";
+import { RiAuctionFill, RiCellphoneFill } from "react-icons/ri";
+import { Brain, Clock, Flame, FlameIcon, Lock, Smartphone, Target } from "lucide-react";
+import { BsCashStack } from "react-icons/bs";
+import { FcIdea } from "react-icons/fc";
+import { CgTrack } from "react-icons/cg";
+import { LuSheet } from "react-icons/lu";
 
 function Home() {
   const navigate = useNavigate();
@@ -20,7 +23,7 @@ function Home() {
           {/* Left Content */}
           <div className="w-full md:w-1/2 text-center md:text-left z-10">
             <h1 className="text-4xl md:text-5xl font-black text-yellow-400 drop-shadow-md mb-4 animate-pulse">
-              🎲 Welcome to UltaAuctions 🎰
+              <RiAuctionFill  size={50}/> Welcome to UltaAuctions
             </h1>
             <p className="text-gray-300 mb-6 text-lg md:text-xl">
               Join the most thrilling auction floor. Lowest unique bid wins. Are
@@ -30,7 +33,7 @@ function Home() {
               onClick={() => navigate("/auctions")}
               className="px-6 py-3 bg-yellow-500 text-black font-bold rounded-xl shadow-lg hover:bg-yellow-400 transition-all transform hover:scale-105"
             >
-              Try Your Luck 🔥
+              Try Your Luck <Flame color="red" size={25} name="flame" className="inline"/>
             </button>
           </div>
 
@@ -48,10 +51,10 @@ function Home() {
         <section className="bg-black py-10 px-4 text-center text-white relative">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/casino-light-bg.svg')] bg-cover opacity-10 pointer-events-none"></div>
           <p className="text-xl font-semibold text-yellow-400 mb-2 animate-bounce">
-            🔥 Featured Auction
+           <Flame color="yellow" size={25} name="flame" className="inline"/>Featured Auction
           </p>
           <h2 className="text-3xl sm:text-4xl font-extrabold mb-2 text-white tracking-wide">
-            Win a Brand New iPhone 15 📱
+            Win a Brand New iPhone 15 <Smartphone color="white" size={40} name="Mobile" className="inline"/>
           </h2>
           <p className="text-gray-300 mb-4 text-lg">
             Starting at just ₹50. Lowest unique bid takes it home. Test your
@@ -61,7 +64,7 @@ function Home() {
             onClick={() => navigate("/auctions")}
             className="bg-yellow-500 hover:bg-yellow-400 text-black px-6 py-3 rounded-xl font-semibold transition-all transform hover:scale-105"
           >
-            Enter Auction Room 🎟️
+            Enter Auction Room <BsCashStack size={25} name="Cash" className="inline"/>
           </button>
         </section>
 
@@ -80,7 +83,7 @@ function Home() {
             {/* Right Text Content */}
             <div className="w-full lg:w-1/2">
               <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-yellow-300">
-                Bid Smart. Win Big. 💡
+                Bid Smart. Win Big. <FcIdea size={35} name="Idea" className="inline"/>
               </h2>
               <p className="text-gray-300 text-lg mb-6">
                 Experience a strategic thrill! It's not about the highest bid.
@@ -88,10 +91,10 @@ function Home() {
               </p>
 
               <ul className="space-y-3 text-lg font-semibold text-yellow-200">
-                <li>🧠 Unique Bids, Real Prizes</li>
-                <li>⏱️ Real-Time Leaderboards</li>
-                <li>🎯 Transparent Winning Logic</li>
-                <li>🔐 Secure Payments & User Safety</li>
+                <li><Brain className="inline"/> Unique Bids, Real Prizes</li>
+                <li><Clock className="inline"/> Real-Time Leaderboards</li>
+                <li><Target className="inline"/> Transparent Winning Logic</li>
+                <li><Lock className="inline"/> Secure Payments & User Safety</li>
               </ul>
 
               {/* Step-by-step */}
@@ -99,7 +102,7 @@ function Home() {
                 {/* Step 1 */}
                 <div className="bg-gradient-to-br from-[#222] to-[#111] p-5 rounded-2xl shadow-md text-center border border-yellow-500">
                   <div className="w-16 h-16 mx-auto mb-4 bg-yellow-100 flex items-center justify-center rounded-full shadow-md">
-                    <img src={PlaceBid} alt="Place Bid" className="w-8 h-8" />
+                    <LuSheet size={40} className="text-gray-800"/>
                   </div>
                   <h3 className="text-xl font-bold text-yellow-300 mb-2">
                     1️⃣ Place Bid
@@ -112,11 +115,7 @@ function Home() {
                 {/* Step 2 */}
                 <div className="bg-gradient-to-br from-[#222] to-[#111] p-5 rounded-2xl shadow-md text-center border border-yellow-500">
                   <div className="w-16 h-16 mx-auto mb-4 bg-yellow-100 flex items-center justify-center rounded-full shadow-md">
-                    <img
-                      src={TrackAuction}
-                      alt="Track Auction"
-                      className="w-8 h-8"
-                    />
+                    <CgTrack size={40} name="TrackIcon" className="text-gray-800"/>
                   </div>
                   <h3 className="text-xl font-bold text-yellow-300 mb-2">
                     2️⃣ Track It
@@ -130,11 +129,7 @@ function Home() {
                 {/* Step 3 */}
                 <div className="bg-gradient-to-br from-[#222] to-[#111] p-5 rounded-2xl shadow-md text-center border border-yellow-500">
                   <div className="w-16 h-16 mx-auto mb-4 bg-yellow-100 flex items-center justify-center rounded-full shadow-md">
-                    <img
-                      src={WinAuction}
-                      alt="Win Auction"
-                      className="w-8 h-8"
-                    />
+                    <RiAuctionFill size={35} name="Auction" className="text-gray-800"/>
                   </div>
                   <h3 className="text-xl font-bold text-yellow-300 mb-2">
                     3️⃣ Claim Victory

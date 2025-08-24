@@ -1,6 +1,4 @@
-import React from "react";
 import AuctionSvg from '../../assets/auctionsvg.svg'
-import Layout from '../../layout/Layout'
 
 function UpdateAuctionPresentation({ handleUserInput, handleFormSubmit, submitting }) {
   return (

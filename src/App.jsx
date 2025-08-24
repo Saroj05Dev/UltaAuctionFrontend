@@ -1,6 +1,5 @@
 import "./App.css";
 import Home from "./pages/Home";
-import BiddingPage from "./pages/BiddingPage";
 import CreateAuction from "./pages/admin/CreateAuction";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
@@ -21,6 +20,7 @@ import RequireAuth from "./features/auth/RequireAuth";
 import Denied from "./pages/Denied";
 import SignupPage from "./features/auth/pages/SignupPage";
 import AuctionsPage from "./features/auction/pages/AuctionsPage";
+import BiddingPage from "./features/auction/pages/BiddingPage";
 
 function App() {
   return (

@@ -8,8 +8,8 @@ import { validateLogin } from "../validation/loginValidation";
 export const useLoginForm = () => {
   const [loginData, setLoginData] = useState({
     email: "",
-    password: "",
-    mobileNumber: "",
+    password: "Saroj#0005",
+    mobileNumber: "7488982537",
   });
   const [loading, setLoading] = useState(false);
 

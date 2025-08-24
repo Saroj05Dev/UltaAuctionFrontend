@@ -8,6 +8,7 @@ function LoginPage() {
     handleFormSubmit,
     handleUserInput,
     loading,
+    loginData,
   } = useLoginForm();
 
   return (
@@ -15,6 +16,7 @@ function LoginPage() {
       handleFormSubmit={handleFormSubmit}
       handleUserInput={handleUserInput}
       loading={loading}
+      loginData={loginData}
     />
   );
 }

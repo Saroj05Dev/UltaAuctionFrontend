@@ -4,6 +4,10 @@ import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/slices/AuthSlice";
 import { useState } from "react";
+import { RiAuctionFill } from "react-icons/ri";
+import { BsQuestion } from "react-icons/bs";
+import { FcAbout } from "react-icons/fc";
+import { LogInIcon, LogOutIcon, Sheet } from "lucide-react";
 
 function Layout({ children }) {
   const navigate = useNavigate();
@@ -41,33 +45,33 @@ function Layout({ children }) {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8 text-lg">
             <Link to="/auctions" className="hover:text-yellow-400 transition">
-              🎲 Auctions
+              <RiAuctionFill size={20} name="AuctionIcon" className="inline"/> Auctions
             </Link>
             <Link to="/how-it-works" className="hover:text-yellow-400 transition">
-              ❓ How It Works
+              <BsQuestion size={25} name="AuctionIcon" className="inline"/> How It Works
             </Link>
             <Link to="/about" className="hover:text-yellow-400 transition">
-              🧾 About
+              <FcAbout size={25} name="AuctionIcon" className="inline"/> About
             </Link>
             {isLoggedIn && role === "USER" && (
               <Link to="/my-bids" className="hover:text-yellow-400 transition">
-                📜 My Bids
+                <Sheet size={20} name="AuctionIcon" className="inline"/> My Bids
               </Link>
             )}
             <div className="ml-10">
               {isLoggedIn ? (
                 <button
                   onClick={handleLogout}
-                  className="hover:text-red-400 font-semibold transition"
+                  className="hover:text-red-400 font-semibold transition cursor-pointer"
                 >
-                  🚪 Logout
+                  <LogOutIcon size={20} name="AuctionIcon" className="inline"/> Logout
                 </button>
               ) : (
                 <Link
                   to="/login"
                   className="hover:text-green-400 font-semibold transition"
                 >
-                  🔐 Login
+                  <LogInIcon size={20} name="AuctionIcon" className="inline"/> Login
                 </Link>
               )}
             </div>
@@ -112,21 +116,21 @@ function Layout({ children }) {
               onClick={() => setMenuOpen(false)}
               className="hover:text-yellow-400"
             >
-              🎲 Auctions
+              <RiAuctionFill size={20} name="AuctionIcon" className="inline"/> Auctions
             </Link>
             <Link
               to="/how-it-works"
               onClick={() => setMenuOpen(false)}
               className="hover:text-yellow-400"
             >
-              ❓ How It Works
+              <BsQuestion size={20} name="AuctionIcon" className="inline"/> How It Works
             </Link>
             <Link
               to="/about"
               onClick={() => setMenuOpen(false)}
               className="hover:text-yellow-400"
             >
-              🧾 About
+              <FcAbout size={25} name="AuctionIcon" className="inline"/> About
             </Link>
             {isLoggedIn && role === "USER" && (
               <Link
@@ -134,7 +138,7 @@ function Layout({ children }) {
                 onClick={() => setMenuOpen(false)}
                 className="hover:text-yellow-400"
               >
-                📜 My Bids
+                <Sheet size={20} name="AuctionIcon" className="inline"/> My Bids
               </Link>
             )}
             {isLoggedIn ? (
@@ -142,7 +146,7 @@ function Layout({ children }) {
                 onClick={handleLogout}
                 className="text-left hover:text-red-400"
               >
-                🚪 Logout
+                <LogOutIcon size={20} name="AuctionIcon" className="inline"/> Logout
               </button>
             ) : (
               <Link
@@ -150,7 +154,7 @@ function Layout({ children }) {
                 onClick={() => setMenuOpen(false)}
                 className="hover:text-green-400"
               >
-                🔐 Login
+                <LogInIcon size={20} name="AuctionIcon" className="inline"/> Login
               </Link>
             )}
           </div>

@@ -1,5 +1,7 @@
-import Layout from "../layout/Layout";
+import { ArrowRight, Target } from "lucide-react";
+import Layout from "../../../layout/Layout";
 import { Link } from "react-router-dom";
+import { MdLeaderboard } from "react-icons/md";
 
 const BiddingPagePresentation = ({
   auction,
@@ -28,7 +30,7 @@ const BiddingPagePresentation = ({
           {/* Auction Title and Info */}
           <div className="mb-6 z-10 relative">
             <h2 className="text-2xl font-bold text-yellow-300 tracking-wide">
-              🎯 {auction?.title}
+             <Target className="inline"/> {auction?.title}
             </h2>
             <p className="text-sm text-gray-300 mt-1">{auction?.description}</p>
           </div>
@@ -93,9 +95,9 @@ const BiddingPagePresentation = ({
           {auction?._id && (
             <Link
               to={`/auction/${auction._id}/leaderboard`}
-              className="text-yellow-400 hover:underline text-center mt-6 block text-sm font-medium relative z-10"
+              className="text-yellow-400 hover:underline hover:text-yellow-800 text-center mt-6 block text-sm font-medium relative z-10 transition"
             >
-              📊 View Live Leaderboard
+              <MdLeaderboard className="inline" size={25}/> View Live Leaderboard <ArrowRight className="inline transition "/>
             </Link>
           )}
         </div>
