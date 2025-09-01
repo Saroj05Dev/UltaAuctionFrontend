@@ -1,4 +1,3 @@
-// src/features/auction/pages/BiddingPage.jsx
 import React from "react";
 import { useBiddingLogic } from "../hooks/useBiddingLogic";
 import BiddingPagePresentation from "../components/BiddingPagePresentation";
