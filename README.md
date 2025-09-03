@@ -25,12 +25,11 @@
 | Payments     | Razorpay                               |
 
 ---
-![Screenshot 2025-07-04 084446](https://github.com/user-attachments/assets/7c39671b-82b0-43cd-b90d-9283addfdaac)
-![Screenshot 2025-07-04 085024](https://github.com/user-attachments/assets/9d27d99d-4051-40e2-92e4-c2a74c2ba8c2)
-![Screenshot 2025-07-04 085047](https://github.com/user-attachments/assets/d589b986-8f55-4746-9416-4c92c139b23e)
-![Screenshot 2025-07-04 085146](https://github.com/user-attachments/assets/597b1160-4510-4006-bf28-80346ba4bff8)
-![Screenshot 2025-07-04 085327](https://github.com/user-attachments/assets/15eefd9c-18ca-470e-9ffc-355de71cece8)
-![Screenshot 2025-07-04 085501](https://github.com/user-attachments/assets/16755b95-932a-4b0b-8946-c47933db4438)
+<img width="1920" height="3504" alt="screencapture-ulta-auction-frontend-saroj-kumar-das-projects-vercel-app-2025-09-03-11_44_19" src="https://github.com/user-attachments/assets/1eee2677-a5ea-405c-8bec-aed5c5c4d9ca" />
+<img width="1920" height="3307" alt="screencapture-ulta-auction-frontend-saroj-kumar-das-projects-vercel-app-auctions-2025-09-03-11_41_50" src="https://github.com/user-attachments/assets/55fe0a75-5932-4fff-ab0d-252e46fbbadc" />
+<img width="1920" height="3261" alt="screencapture-ulta-auction-frontend-saroj-kumar-das-projects-vercel-app-about-2025-09-03-11_43_22" src="https://github.com/user-attachments/assets/1e931893-ddd0-4fe2-9b76-35607e7fae01" />
+<img width="1891" height="861" alt="Screenshot 2025-09-03 114359" src="https://github.com/user-attachments/assets/82b7a982-a3a0-456f-9b87-19f0739c1584" />
+<img width="1920" height="3504" alt="screencapture-ulta-auction-frontend-saroj-kumar-das-projects-vercel-app-2025-09-03-11_44_19" src="https://github.com/user-attachments/assets/378607b3-a1b1-47eb-a97d-bff45686c027" />
 
 ## 🚀 Features
 
