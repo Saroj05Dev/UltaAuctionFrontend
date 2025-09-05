@@ -16,15 +16,15 @@ It features **role-based access**, real-time **leaderboards**, OTP-based signup,
 ---
 
 ## 📑 Table of Contents
-- [Tech Stack](#tech-stack)
-- [Screenshots](#screenshots)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Environment Variables](#environment-variables)
-- [Run Locally](#run-locally)
-- [Author](#author)
-- [Contributing](#contributing)
-- [License](#license)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [📸 Screenshots](#-screenshots)
+- [🚀 Features](#-features)
+- [📁 Project Structure](#-project-structure)
+- [📂 Environment Variables](#-environment-variables)
+- [💻 Run Locally](#-run-locally)
+- [🙋‍♂️ Author](#️-author)
+- [🤝 Contributing](#-contributing)
+- [📜 License](#-license)
 
 ---
 
